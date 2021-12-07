@@ -1,38 +1,270 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+
+/*General*/
+
+:root {
+  --main-bg-color: #1e1c1d;
+  --main-font-color: #fff;
+  --second-bg-color: #ff9900;
+  --second-font-color: #000;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: var(--main-font-color)
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+html {
+  background-color: var(--main-bg-color);
+}
+
+.screen {
+  padding: 20px;
+}
+
+button {
+  text-align: center;
+  letter-spacing: 3px;
+  color: var(--second-font-color);
+  background-color: var(--second-bg-color);
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 5px 10px 5px 13px;
+  font-weight: 700;
+}
+
+button:hover {
+  color: var(--main-font-color);
+}
+
+.logo {
+  user-select: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.logo-second {
+  padding: 0 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+  color: var(--second-font-color);
+  background-color: var(--second-bg-color);
+}
+
+input, select {
+  border: 0;
+  outline: none;
+  padding: 5px 10px;
+  color: var(--second-font-color);
+}
+
+input[type=radio], input[type=checkbox] {
+  width: auto !important;
+}
+
+select, option {
+  color: var(--second-font-color);
+}
+
+/*End General*/
+
+/*QuizCard*/
+.quizCard {
+  border: 1px solid var(--second-bg-color);
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.quizCard div {
+  display: flex;
+}
+
+.quizCard div p {
+  display: flex;
+  align-items: center;
+}
+
+.quizCard div p svg {
+  cursor: pointer;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.quizCard div p svg:hover path {
+  color: var(--second-bg-color);
+}
+
+.quizCard button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+/*EndQuizCard*/
+
+/*MainLayout*/
+
+.mainLayout {
+  padding-top: 20px;
+  width: 80%;
+  margin: 0 auto;
+  max-width: 1300px;
+}
+
+/*EndMainLayout*/
+
+/*Nav*/
+nav {
+  text-transform: uppercase;
+  margin: 10px 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 30px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+nav a:hover {
+  color: var(--second-bg-color);
+}
+
+
+.logo-title {
+  font-size: 5rem;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*EndNav*/
+
+/*HomeScreen*/
+
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.quizList {
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 10px;
+}
+
+/*HomeScreen End*/
+
+/*OpenQuiz*/
+.openQuiz {
+  text-align: center;
+}
+
+.openQuiz h1 {
+  margin-bottom: 10px;
+}
+
+.openQuiz input {
+  margin-top: 10px;
+}
+
+/*EndOpenQuiz*/
+
+/*Question*/
+
+.questions {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: fit-content;
+}
+
+.question label {
+  display: flex;
+  gap: 5px;
+}
+
+.question p {
+  margin-bottom: 5px;
+}
+
+.question button {
+  margin: 10px 0;
+}
+
+/*EndQuestion*/
+
+/*CreateQuiz*/
+.createQuiz {
+  position: relative;
+}
+
+
+.testQuestion label {
+  flex-direction: column;
+}
+
+.createQuiz .modal {
+  position: absolute;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 200px;
+  top: calc(50% - 100px);
+  left: calc(50% - 150px);
+  background-color: var(--main-bg-color);
+  border: 1px solid #000;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.createQuiz .modal input {
+  margin: 10px 0;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.createQuiz .modal select {
+  width: 100%;
 }
+
+
+.createQuiz .modal label {
+  display: flex;
+  align-items: center;
+}
+
+.createQuiz button {
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+.createQuiz .modal button {
+  margin-top: 5px;
+  margin-right: 0;
+}
+
+/*EndCreateQuiz*/
+
+/*QuizPage*/
+.quizPage button {
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+/*EndQuizPage*/
