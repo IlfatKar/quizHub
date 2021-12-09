@@ -1,7 +1,10 @@
-import {configureStore} from "@reduxjs/toolkit";
+import {configureStore} from '@reduxjs/toolkit'
+import quizzesReducer from './features/quizzes/quizzesSlice'
 
-const store = configureStore({
-  reducer: {}
+export const store = configureStore({
+  reducer: {
+    quizzes: quizzesReducer,
+  },
 })
 
 export type RootState = ReturnType<typeof store.getState>

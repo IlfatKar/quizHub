@@ -19,5 +19,12 @@ export interface IQuestion {
 export interface IQuiz {
   questions: IQuestion[],
   title: string,
+  description?: string,
   rating?: number
+}
+
+export enum asyncStage {
+  pending = 'pending',
+  fulfilled = 'fulfilled',
+  rejected = 'rejected'
 }

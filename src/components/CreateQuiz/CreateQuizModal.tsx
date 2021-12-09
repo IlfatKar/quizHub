@@ -3,7 +3,7 @@ import {answerType, IQuestion} from "../../types";
 
 interface ICreateQuizModalPropsType {
   closeModal: () => void,
-  addQuestion: (question: IQuestion) => void
+  addQuestion: (question: IQuestion) => void,
 }
 
 const CreateQuizModal: FC<ICreateQuizModalPropsType> = ({closeModal, addQuestion}) => {
@@ -36,7 +36,10 @@ const CreateQuizModal: FC<ICreateQuizModalPropsType> = ({closeModal, addQuestion
 
   const displayAnswerInput = () => {
     if (type === answerType.text) {
-      return <div><input type="text" onChange={(e) => setCorrect(e.target.value)}
+      return <div><input type="text" onChange={(e) => {
+        setCorrect(e.target.value)
+        setAnswers([e.target.value])
+      }}
                          placeholder={'Your answer'}/></div>
     }
     if (type === answerType.radio) {

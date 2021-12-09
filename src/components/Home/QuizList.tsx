@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
 import QuizCard from "../QuizCard";
+import {IQuiz} from "../../types";
 
-const QuizList = () => {
+interface QuizListProps {
+  quizzes: IQuiz[]
+}
+
+const QuizList: FC<QuizListProps> = ({quizzes}) => {
   return (
     <div className={'quizList'}>
-      <QuizCard/>
-      <QuizCard/>
-      <QuizCard/>
+      {
+        quizzes.map((item, i) => (
+          <QuizCard key={item.title + i} quiz={item}/>
+        ))
+      }
     </div>
   );
 };

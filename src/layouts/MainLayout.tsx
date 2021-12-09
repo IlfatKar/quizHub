@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link, Route, Routes} from "react-router-dom";
 import Home from "../components/Home/Home";
 import CreateQuiz from "../components/CreateQuiz/CreateQuiz";
 import OpenQuiz from "../components/OpenQuiz";
 import QuizPage from "../components/Quiz/QuizPage";
+import {asyncStage} from "../types";
 
 const MainLayout = () => {
   return (

@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {AiFillCaretDown, AiFillCaretUp} from "react-icons/all";
+import {IQuiz} from "../types";
 
-const QuizCard = () => {
+interface QuizCardProps {
+  quiz: IQuiz
+}
+
+const QuizCard: FC<QuizCardProps> = ({quiz}) => {
   return (
     <div className={'quizCard'}>
-      <h2>title</h2>
-      <p>desc</p>
+      <h2>{quiz.title}</h2>
+      <p>{quiz.description || ''}</p>
       <div>
-        <p>Rating: <AiFillCaretUp/> +1 <AiFillCaretDown/></p>
+        <p>Rating: <AiFillCaretUp/> {quiz.rating || 0} <AiFillCaretDown/></p>
         <button>Start</button>
       </div>
     </div>
