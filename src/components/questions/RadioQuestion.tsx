@@ -2,7 +2,6 @@ import React, {FC} from 'react';
 import {IAnswer, IQuestion} from "../../types";
 
 const RadioQuestion: FC<{ question: IQuestion }> = ({question}) => {
-  console.log(question)
   return (
     <div className={'radioQuestion question'}>
       <p>{question.title}</p>

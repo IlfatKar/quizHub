@@ -17,6 +17,7 @@ export interface IQuestion {
 }
 
 export interface IQuiz {
+  id?: string,
   questions: IQuestion[],
   title: string,
   description?: string,

@@ -1,36 +1,32 @@
 import React, {useEffect, useState} from 'react';
 import CreateQuizModal from "./CreateQuizModal";
-import {answerType, IQuestion, IQuiz} from "../../types";
+import {answerType, asyncStage, IQuestion, IQuiz} from "../../types";
 import TextQuestion from "../questions/TextQuestion";
 import RadioQuestion from "../questions/RadioQuestion";
 import CheckboxQuestion from "../questions/CheckboxQuestion";
-import {useAppDispatch} from "../../store/hooks";
-import {addQuiz} from "../../store/features/quizzes/quizzesSlice";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
+import {addQuiz, dropId} from "../../store/features/quizzes/quizzesSlice";
 import {store} from 'react-notifications-component';
+import {useNavigate} from 'react-router-dom'
 
 const CreateQuiz = () => {
   const [questions, setQuestions] = useState<IQuestion[]>([])
   const [modalOpen, setModalOpen] = useState(false)
   const [description, setDescription] = useState('')
   const [title, setTitle] = useState('')
+
   const addQuestion = (question: IQuestion) => {
     setQuestions([...questions, question])
   }
-
+  const {id, status} = useAppSelector(store => store.quizzes)
   const dispatch = useAppDispatch()
+  let navigate = useNavigate();
 
-  const createQuiz = () => {
-    let obj: IQuiz = {
-      rating: 0,
-      title,
-      description,
-      questions
-    }
-    try {
-      dispatch(addQuiz(obj))
+  useEffect(() => {
+    if (status === asyncStage.fulfilled && id) {
       store.addNotification({
         title: "Success",
-        message: "Quiz created successful",
+        message: "Quiz created successful!<br> Your id - " + id,
         type: "success",
         insert: "top",
         container: "top-right",
@@ -41,7 +37,21 @@ const CreateQuiz = () => {
           onScreen: true
         }
       });
-    //  TODO: REDIRECT TO QUIZ PAGE
+      if (id) navigate('/quiz/' + id, {replace: true})
+      dispatch(dropId())
+    }
+  }, [id, status])
+
+  const createQuiz = () => {
+    let obj: IQuiz = {
+      rating: 0,
+      title,
+      description,
+      questions
+    }
+    try {
+      dispatch(addQuiz(obj))
+
     } catch (e: any) {
       store.addNotification({
         title: "Quiz save error!",
