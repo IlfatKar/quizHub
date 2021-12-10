@@ -13,7 +13,7 @@ export interface IQuestion {
   title: string,
   type: answerType,
   answers: IAnswer[],
-  correct: string | number
+  correct: string | number | number[]
 }
 
 export interface IQuiz {

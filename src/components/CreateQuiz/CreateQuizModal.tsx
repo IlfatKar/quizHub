@@ -11,7 +11,7 @@ const CreateQuizModal: FC<ICreateQuizModalPropsType> = ({closeModal, addQuestion
   const [answerCount, setAnswerCount] = useState<number>(1)
   const [title, setTitle] = useState<string>("")
   const [answers, setAnswers] = useState<any[]>([])
-  const [correct, setCorrect] = useState<string | number>('')
+  const [correct, setCorrect] = useState<string | number | number[]>('')
 
   const chooseAnswerCount = (e: ChangeEvent<HTMLInputElement>) => {
     setAnswerCount((+e.target.value))
@@ -34,13 +34,13 @@ const CreateQuizModal: FC<ICreateQuizModalPropsType> = ({closeModal, addQuestion
     }
   }
 
+
   const displayAnswerInput = () => {
     if (type === answerType.text) {
       return <div><input type="text" onChange={(e) => {
         setCorrect(e.target.value)
         setAnswers([e.target.value])
-      }}
-                         placeholder={'Your answer'}/></div>
+      }} placeholder={'Your answer'}/></div>
     }
     if (type === answerType.radio) {
       return (<div className={'question'}>
@@ -63,7 +63,20 @@ const CreateQuizModal: FC<ICreateQuizModalPropsType> = ({closeModal, addQuestion
           </label>
           {[...Array(answerCount)].map((_, i) => (
             <label key={i}>
-              <input type="checkbox" value={i} onChange={e => setCorrect(e.target.value)}/>
+              <input type="checkbox" value={i} onChange={e => {
+                if (Array.isArray(correct)) {
+                  let tmp = [...correct]
+                  if (tmp.includes(+e.target.value)) {
+                    tmp = tmp.filter(i => i !== +e.target.value)
+                    setCorrect([...tmp])
+                  } else {
+                    setCorrect([...tmp, +e.target.value])
+                  }
+                } else {
+                  setCorrect([+e.target.value])
+                }
+                console.log(1)
+              }}/>
               <input type={'text'} placeholder={'Answer'}
                      onChange={(e) => onChangeHandler(e, i)}/>
             </label>))}

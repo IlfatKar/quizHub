@@ -51,7 +51,6 @@ const CreateQuiz = () => {
     }
     try {
       dispatch(addQuiz(obj))
-
     } catch (e: any) {
       store.addNotification({
         title: "Quiz save error!",

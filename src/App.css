@@ -48,6 +48,10 @@ button:hover {
   color: var(--main-font-color);
 }
 
+button:disabled {
+  background-color: #cb7901;
+}
+
 .logo {
   user-select: none;
   border-radius: 5px;
