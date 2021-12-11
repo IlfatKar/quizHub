@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import {asyncStage, IQuiz} from "../../../types";
-import {child, get, ref, push, set} from "firebase/database";
+import {child, get, ref, push, set, update} from "firebase/database";
 import {database} from "../../../firebaseConfig";
 
 export interface QuizzesState {
@@ -54,6 +54,21 @@ export const fetchQuizById = createAsyncThunk(
     } catch (e: any) {
       return rejectWithValue(e.message)
     }
+  }
+)
+
+export const doRatingUp = createAsyncThunk(
+  'quizzes/doRatingUp',
+  async ({id, quiz}: any, _) => {
+    const data = {...quiz, rating: 1 + quiz.rating}
+    update(ref(database, 'quizzes/' + id), data)
+  }
+)
+export const doRatingDown = createAsyncThunk(
+  'quizzes/doRatingUp',
+  async ({id, quiz}: any, _) => {
+    const data = {...quiz, rating: quiz.rating - 1}
+    update(ref(database, 'quizzes/' + id), data)
   }
 )
 
