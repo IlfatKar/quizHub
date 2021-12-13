@@ -78,6 +78,9 @@ export const quizzesSlice = createSlice({
   reducers: {
     dropId: (store) => {
       store.id = null
+    },
+    changeRating: (store,action) => {
+      // store.quizzes
     }
   },
   extraReducers: (builder) => {
